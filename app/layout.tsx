@@ -21,10 +21,10 @@ const raleway = Raleway({
 
 const indexable = isIndexableSite();
 const productionTracking = process.env.RINON_PRODUCTION_TRACKING_ENABLED === "true";
-const currentGscVerificationToken = "DG5fIXNQgMGRpHGC0RwK-R3QvIyx20qjrQQdMRqCymQ";
+const currentGscVerificationToken = "lCFMIIVsso0tKtwMRjnZWQs1l2FbYnlJPWpqxsqjj_Y";
 const gscVerificationToken = process.env.NEXT_PUBLIC_GSC_VERIFICATION?.trim() || currentGscVerificationToken;
-const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim();
-const gaMeasurementId = gaId && process.env.VERCEL_ENV === "production" ? gaId : undefined;
+const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim() || "G-CLSKZ2P8CJ";
+const gaMeasurementId = /^G-[A-Z0-9]+$/i.test(gaId) && process.env.VERCEL_ENV === "production" ? gaId : undefined;
 const mountsProductionTracking = productionTracking || Boolean(gaMeasurementId);
 
 export const metadata: Metadata = {
@@ -57,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <JsonLd data={organizationJsonLd} />
     <SiteHeader />
     <MotionController />
-    {mountsProductionTracking ? <><ProductionTracking googleAnalyticsId={gaMeasurementId} /><CookieConsent /></> : !indexable ? <StagingTracking /> : null}
+    {mountsProductionTracking ? <><ProductionTracking googleAnalyticsId={gaMeasurementId} fullTrackingEnabled={productionTracking} /><CookieConsent /></> : !indexable ? <StagingTracking /> : null}
     <div id="main-content">{children}</div>
     <SiteFooter />
     <CommercialDock />

@@ -3,10 +3,10 @@ import {routeMetadata} from "@/lib/seo";
 import {productNavGroups,serviceNavItems} from "@/lib/navigation";
 import {WhatsAppCTA} from "@/components/WhatsAppCTA";
 
-export const metadata=routeMetadata("/soluciones","Productos y soluciones metálicas en Santiago","Explora productos y servicios de RINON: camarotes, camas, camas balinesas, mesas, escritorios, cierres, rejas, portones, mallas, estructuras y fabricación metálica a medida.");
+export const metadata=routeMetadata("/soluciones","Productos y soluciones metálicas en Santiago","Explora productos y servicios de RINON: camarotes, camas metálicas y flotantes, colchones, camas balinesas, mesas, escritorios, cierres, rejas, portones, mallas, estructuras y fabricación metálica a medida.");
 
 const groupCopy:Record<string,{kicker:string;body:string}>={
- "Camas y descanso":{kicker:"CAMAS Y DESCANSO",body:"Camarotes, camas metálicas y camas balinesas para hogar, instituciones, exterior y compras por volumen."},
+ "Camas y descanso":{kicker:"CAMAS Y DESCANSO",body:"Camarotes, camas metálicas y flotantes, colchones y camas balinesas para hogar, instituciones, exterior y compras por volumen."},
  "Mobiliario y equipamiento":{kicker:"MOBILIARIO",body:"Mesas, escritorios, racks, soportes y equipamiento para hogar, empresa e instituciones."},
  "Cierres y accesos":{kicker:"CIERRES Y ACCESOS",body:"Cierres, rejas, mallas y portones definidos según medidas, accesos, terreno y uso."},
  "Estructuras":{kicker:"ESTRUCTURAS",body:"Estructuras y fabricaciones especiales desde plano, foto, croquis, muestra o medidas."},

@@ -1,6 +1,8 @@
 old_url,decision,new_url,family,evidence_state,cutover_rule
 /,KEEP 200,/,core,durable,keep
 /camarotes,KEEP 200,/camarotes,camarotes,durable,keep
+/cama-flotante,REBUILD,/cama-flotante,camas,new owner,keep
+/colchones,REBUILD,/colchones,colchones,new owner,keep
 /camarote-nido,KEEP 200,/camarote-nido,product,durable,keep
 /camarote-triple,KEEP 200,/camarote-triple,product,durable,keep
 /camarote-doble,KEEP 200,/camarote-doble,product,durable,keep

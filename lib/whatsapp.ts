@@ -5,6 +5,7 @@ const categoryPrompts: Record<string, string> = {
   estructuras: "Hola, quiero cotizar una estructura metálica. Tengo antecedentes del proyecto para enviar.",
   cierres: "Hola, quiero cotizar un cierre, reja o portón. Puedo indicar medidas y ubicación.",
   camarotes: "Hola, quiero cotizar camas o camarotes metálicos. Puedo indicar modelo, cantidad y destino.",
+  colchones: "Hola, quiero cotizar colchones. Puedo indicar modelo o tecnología, medida de la cama y cantidad.",
   equipamiento: "Hola, quiero cotizar equipamiento metálico. Puedo indicar medidas, uso y cantidad.",
   especiales: "Hola, necesito una fabricación metálica especial. Puedo enviar una foto, croquis o muestra de referencia.",
   pintura: "Hola, quiero consultar por pintura electrostática. Puedo enviar fotos, cantidad y medidas de las piezas.",

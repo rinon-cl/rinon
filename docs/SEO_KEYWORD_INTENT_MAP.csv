@@ -2,6 +2,8 @@ route,ux_label,primary_intent,primary_keyword_theme,secondary_theme,user_type,fu
 /,RINON,fabricante metálico / soluciones,soluciones metálicas Santiago,fabricación metálica San Bernardo,particular+B2B,discovery,quote general,KEEP 200
 /camarotes,Camarotes,comprar/cotizar camarotes,camarotes metálicos,camarotes Santiago; literas,B2C+B2B,commercial,category=camarotes,KEEP 200
 /camas-metalicas,Camas,comprar/cotizar cama,camas metálicas,camas de acero; cama institucional,B2C+B2B,commercial,category=camarotes detail=camas-metalicas,REBUILD
+/cama-flotante,Cama flotante,comprar/cotizar cama flotante,cama flotante metálica,cama suspendida; cama con base flotante,B2C,commercial,category=camarotes detail=cama-flotante,REBUILD
+/colchones,Colchones,comprar/cotizar colchón,colchones de espuma; colchones resortes Bonell; colchones resortes Pocket,colchones 1 plaza; colchones 1 1/2 plazas; colchones 2 plazas; colchones King; colchones Super King,B2C+B2B,commercial,category=colchones detail=modelo,REBUILD
 /camas-balinesas,Camas balinesas,comprar/cotizar cama balinesa,camas balinesas metálicas,cama balinesa exterior,B2C+hospitality,commercial,category=equipamiento detail=camas-balinesas,REBUILD
 /camarote-con-escritorio,Camarote con escritorio,comprar producto,camarote con escritorio,cama loft escritorio; cama alta escritorio,B2C,commercial,category=camarotes detail=camarote_escritorio,KEEP 200
 /mesas-metalicas,Mesas,comprar/cotizar mesa,mesas metálicas,mesas a medida,B2C+B2B,commercial,category=equipamiento detail=mesas-metalicas,REBUILD

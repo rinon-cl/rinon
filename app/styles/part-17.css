@@ -25,11 +25,42 @@
 .rinon-scope-grid span{display:block;margin-bottom:34px;color:#F58220;font-size:9px;letter-spacing:.15em;font-weight:900;text-transform:uppercase}
 .rinon-scope-grid h3{margin:0 0 12px;font-size:22px;line-height:1.12}
 .rinon-scope-grid p{margin:0;color:#62686B;font-size:13px;line-height:1.65}
+.rinon-mattress-models{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.rinon-mattress-model{overflow:hidden;background:#fff;border:1px solid #d0d1ce;border-radius:8px}
+.rinon-mattress-model figure{position:relative;aspect-ratio:4/3;margin:0;overflow:hidden;background:#e7e5e0}
+.rinon-mattress-model figure img{object-fit:cover}
+.rinon-mattress-model figcaption{position:absolute;left:12px;bottom:12px;background:rgba(10,11,12,.82);border-left:2px solid #F58220;color:#fff;padding:7px 9px;font-size:9px;font-weight:900;line-height:1.2}
+.rinon-mattress-model-body{padding:24px}
+.rinon-mattress-model-index{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.rinon-mattress-model-index span{color:#B85310;font-size:10px;font-weight:900}
+.rinon-mattress-model-index small{color:#62686B;font-size:9px;font-weight:900;letter-spacing:.12em;text-align:right;text-transform:uppercase}
+.rinon-mattress-model h3{min-height:2.2em;margin:0 0 12px;font-size:24px;line-height:1.1}
+.rinon-mattress-model-body>p{min-height:5.2em;margin:0 0 22px;color:#62686B;font-size:12px;line-height:1.6}
+.rinon-mattress-model dl{display:grid;grid-template-columns:1fr 1fr;margin:0 0 22px;border-top:1px solid #d0d1ce;border-left:1px solid #d0d1ce}
+.rinon-mattress-model dl div{display:grid;gap:4px;min-width:0;padding:12px;border-right:1px solid #d0d1ce;border-bottom:1px solid #d0d1ce}
+.rinon-mattress-model dl div:first-child{grid-column:1/-1}
+.rinon-mattress-model dt{color:#707679;font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.rinon-mattress-model dd{overflow-wrap:anywhere;margin:0;font-size:11px;font-weight:800;line-height:1.35}
+.rinon-mattress-layers{min-height:150px}
+.rinon-mattress-layers>strong,.rinon-mattress-sizes>strong{display:block;margin-bottom:10px;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+.rinon-mattress-layers ul{display:grid;gap:7px;margin:0;padding:0 0 0 16px;color:#62686B;font-size:11px;line-height:1.45}
+.rinon-mattress-sizes{margin-top:22px;padding-top:18px;border-top:1px solid #d0d1ce}
+.rinon-mattress-sizes ul{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
+.rinon-mattress-sizes li{border:1px solid #b9bcbd;padding:6px 8px;color:#3d4244;font-size:9px;font-weight:800}
+.rinon-mattress-quote{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:42px;margin-top:22px;background:#111315;color:#fff;font-size:10px;font-weight:900;text-decoration:none;text-transform:uppercase;transition:background .16s ease,color .16s ease}
+.rinon-mattress-quote:hover,.rinon-mattress-quote:focus-visible{background:#F58220;color:#111315}
+.rinon-mattress-quote:focus-visible{outline:3px solid #F58220;outline-offset:3px}
+.rinon-mattress-size-guide{background:#fff}
+.rinon-mattress-size-table{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid #b9bcbd;border-left:1px solid #b9bcbd}
+.rinon-mattress-size-table>div{display:grid;gap:8px;min-width:0;padding:24px;border-right:1px solid #b9bcbd;border-bottom:1px solid #b9bcbd}
+.rinon-mattress-size-table strong{font-size:15px}
+.rinon-mattress-size-table span{color:#62686B;font-size:11px}
 @media(max-width:1100px){
  .product-visual-gallery-main{min-height:500px}
  .product-visual-gallery-strip figure{min-height:180px}
 }
-@media(max-width:900px){.rinon-scope-grid{grid-template-columns:1fr}.rinon-scope-grid article{margin-right:0}}
+@media(max-width:1100px){.rinon-mattress-models{grid-template-columns:repeat(2,minmax(0,1fr))}.rinon-mattress-size-table{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.rinon-scope-grid{grid-template-columns:1fr}.rinon-scope-grid article{margin-right:0}.rinon-mattress-size-table{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){
  .product-visual-gallery{gap:10px}
  .rinon-commercial-hero .product-visual-gallery{order:-1}
@@ -37,4 +68,8 @@
  .product-visual-gallery-main figcaption{left:12px;right:12px;bottom:64px;padding:11px 12px}
  .product-visual-gallery-strip{grid-template-columns:1fr}
  .product-visual-gallery-strip figure{min-height:245px}
+ .rinon-mattress-models{grid-template-columns:1fr}
+ .rinon-mattress-model h3,.rinon-mattress-model-body>p,.rinon-mattress-layers{min-height:0}
+ .rinon-mattress-size-table{grid-template-columns:1fr}
+ .rinon-mattress-size-table>div{grid-template-columns:1fr 1fr;align-items:center;padding:18px}
 }

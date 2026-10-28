@@ -1,7 +1,7 @@
 "use client";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CONSENT_KEY = "rinon_cookie_consent";
 const VISITOR_KEY = "rinon_analytics_visitor";
@@ -15,8 +15,18 @@ const INTERNAL_ANALYTICS_EVENTS = [
 type InternalAnalyticsEvent = (typeof INTERNAL_ANALYTICS_EVENTS)[number];
 const INTERNAL_ANALYTICS_EVENT_SET = new Set<string>(INTERNAL_ANALYTICS_EVENTS);
 
-declare global { interface Window { dataLayer?: Array<Record<string, unknown>> } }
+declare global {
+  interface Window {
+    dataLayer?: Array<Record<string, unknown>>;
+    gtag?: (...args: unknown[]) => void;
+  }
+}
 function hasAnalyticsConsent() { try { const saved = JSON.parse(localStorage.getItem(CONSENT_KEY) ?? "null"); return saved?.value === "all"; } catch { return false; } }
+function ensureGoogleTag() {
+  window.dataLayer = window.dataLayer ?? [];
+  window.gtag = window.gtag ?? ((...args: unknown[]) => { window.dataLayer?.push(args as unknown as Record<string, unknown>); });
+  return window.gtag;
+}
 function getAnonymousId(storage: Storage, key: string) { const saved = storage.getItem(key); if (saved) return saved; const value = crypto.randomUUID().replaceAll("-", ""); storage.setItem(key, value); return value; }
 function storeAttribution(){
   try{
@@ -53,19 +63,30 @@ function persistIfInternal(eventName: string) {
 
 type ProductionTrackingProps = {
   googleAnalyticsId?: string;
+  fullTrackingEnabled: boolean;
 };
 
-export function ProductionTracking({ googleAnalyticsId }: ProductionTrackingProps) {
-  const rawGtmId = process.env.NEXT_PUBLIC_GTM_ID;
-  const rawClarityId = process.env.NEXT_PUBLIC_CLARITY_ID;
+export function ProductionTracking({ googleAnalyticsId, fullTrackingEnabled }: ProductionTrackingProps) {
+  const rawGtmId = fullTrackingEnabled ? process.env.NEXT_PUBLIC_GTM_ID : undefined;
+  const rawClarityId = fullTrackingEnabled ? process.env.NEXT_PUBLIC_CLARITY_ID : undefined;
   const gtmId = rawGtmId && /^GTM-[A-Z0-9]+$/i.test(rawGtmId) ? rawGtmId : undefined;
   const clarityId = rawClarityId && /^[a-z0-9]+$/i.test(rawClarityId) ? rawClarityId : undefined;
   const gaId = googleAnalyticsId && /^G-[A-Z0-9]+$/i.test(googleAnalyticsId) ? googleAnalyticsId : undefined;
   const pathname = usePathname(); const [enabled, setEnabled] = useState(false);
+  const gaInitialized = useRef(false);
   useEffect(() => { const syncConsent = () => setEnabled(hasAnalyticsConsent()); syncConsent(); window.addEventListener("rinon-cookie-consent", syncConsent); return () => window.removeEventListener("rinon-cookie-consent", syncConsent); }, []);
-  useEffect(() => { if (!enabled) return; storeAttribution(); sendAnalyticsEvent("page_view"); }, [enabled, pathname]);
   useEffect(() => {
-    if (!enabled) return;
+    if (!enabled || !gaId) return;
+    const gtag = ensureGoogleTag();
+    if (!gaInitialized.current) {
+      gtag("js", new Date());
+      gaInitialized.current = true;
+    }
+    gtag("config", gaId, { page_path: pathname, page_title: document.title });
+  }, [enabled, gaId, pathname]);
+  useEffect(() => { if (!enabled || !fullTrackingEnabled) return; storeAttribution(); sendAnalyticsEvent("page_view"); }, [enabled, pathname, fullTrackingEnabled]);
+  useEffect(() => {
+    if (!enabled || !fullTrackingEnabled) return;
     const trackClick = (event: MouseEvent) => {
       const target=(event.target as HTMLElement); const link=target.closest<HTMLAnchorElement>("a"); const tracked=target.closest<HTMLElement>("[data-event]");
       if(tracked){
@@ -104,10 +125,10 @@ export function ProductionTracking({ googleAnalyticsId }: ProductionTrackingProp
     };
     document.addEventListener("click",trackClick); window.addEventListener("rinon-lead-submitted",trackForm); window.addEventListener("rinon-semantic-event",semantic);
     return()=>{document.removeEventListener("click",trackClick);window.removeEventListener("rinon-lead-submitted",trackForm);window.removeEventListener("rinon-semantic-event",semantic)};
-  },[enabled]);
+  },[enabled,fullTrackingEnabled]);
   if (!enabled) return null;
   return <>
-    {gaId ? <><Script id="google-analytics-loader" src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" /><Script id="google-analytics-config" strategy="afterInteractive">{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '${gaId}');`}</Script></> : null}
+    {gaId ? <Script id="google-analytics-loader" src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" /> : null}
     {gtmId ? <><Script id="gtm-data-layer" strategy="afterInteractive">{`window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});`}</Script><Script id="google-tag-manager" src={`https://www.googletagmanager.com/gtm.js?id=${gtmId}`} strategy="afterInteractive" /></> : null}
     {clarityId ? <Script id="microsoft-clarity" strategy="afterInteractive">{`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${clarityId}");`}</Script> : null}
   </>;

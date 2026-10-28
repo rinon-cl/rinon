@@ -4,7 +4,8 @@
   "git": {
     "deploymentEnabled": {
       "static-preview": false,
-      "preview-static-build": false
+      "preview-static-build": false,
+      "produccion/rinon-v2": false
     }
   }
 }

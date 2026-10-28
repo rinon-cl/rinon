@@ -7,9 +7,9 @@ tsconfig.tsbuildinfo
 public/visuals/archive/
 public/visuals/product-theatre/
 public/visuals/home-hero-conceptual-welding.webp
-.env
-.env.local
-.env.*.local
+.env*
+!.env.example
+!.env.preview.example
 .vercel/
 .DS_Store
 

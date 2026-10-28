@@ -50,7 +50,7 @@ check(legacyPage.includes("routeMetadata")&&legacyPage.includes("PREGUNTAS FRECU
 const preserved=["camarote-nido","camarote-triple","camarote-doble","cama-alta","camarote-titanic","camarote-1-5-plazas","camarote-desmontable","cama-dos-plazas-con-cajon","camarote-2-plazas","cama-institucional-metalica","cama-loft-metalica","cama-loft-con-escritorio","mobiliario-institucional"];
 for(const slug of preserved)check(migrationContract.includes(`"${slug}"`)&&migration.includes("legacyCommercialSlugs"),`preserved organic owner remains protected: /${slug}`);
 
-const expanded=["/camas-metalicas","/camas-balinesas","/mesas-metalicas","/escritorios-metalicos","/soldadura-mig","/corte-metalico","/instalacion","/reparaciones-metalicas"];
+const expanded=["/camas-metalicas","/cama-flotante","/colchones","/camas-balinesas","/mesas-metalicas","/escritorios-metalicos","/soldadura-mig","/corte-metalico","/instalacion","/reparaciones-metalicas"];
 for(const route of expanded)check(expansions.includes(`slug:"${route}"`),`commercial intent owner remains defined: ${route}`);
 
 check(tracking.includes("contact_whatsapp")&&tracking.includes("contact_phone")&&tracking.includes("generate_lead"),"production analytics covers WhatsApp, phone and generated leads");

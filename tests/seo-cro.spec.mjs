@@ -2,7 +2,7 @@ import {test,expect} from "@playwright/test";
 import { COPY } from "./fixtures/copy.mjs";
 
 const expandedRoutes=[
- "/camas-metalicas","/camas-balinesas","/mesas-metalicas","/escritorios-metalicos",
+ "/camas-metalicas","/cama-flotante","/colchones","/camas-balinesas","/mesas-metalicas","/escritorios-metalicos",
  "/soldadura-mig","/corte-metalico","/instalacion","/reparaciones-metalicas",
 ];
 
@@ -26,7 +26,7 @@ const dedicatedCommercialRoutes=[
 const preCutoverRedirectAliases=[
   "/cercos-metalicos-santiago","/portones-industriales","/mallas-separadoras-industriales","/soldadura-metalica-santiago",
 ];
-const currentGscVerificationToken="DG5fIXNQgMGRpHGC0RwK-R3QvIyx20qjrQQdMRqCymQ";
+const currentGscVerificationToken="lCFMIIVsso0tKtwMRjnZWQs1l2FbYnlJPWpqxsqjj_Y";
 
 async function assertSeoShell(page,route){
  const response=await page.goto(route,{waitUntil:"domcontentloaded"});
@@ -153,7 +153,7 @@ test("pre-cutover migration aliases remain disabled in staging",async({page})=>{
 
 test("representative organic landings remain usable at mobile width",async({page})=>{
  await page.setViewportSize({width:390,height:900});
- for(const route of ["/camarotes","/camas-metalicas","/cierres-perimetrales","/estructuras-metalicas","/rejas-metalicas","/portones-metalicos","/mallas-3d","/mallas-separadoras","/fabricacion-metalica","/empresas","/proyectos","/camarote-nido","/soldadura-mig"]){
+ for(const route of ["/camarotes","/camas-metalicas","/cama-flotante","/colchones","/cierres-perimetrales","/estructuras-metalicas","/rejas-metalicas","/portones-metalicos","/mallas-3d","/mallas-separadoras","/fabricacion-metalica","/empresas","/proyectos","/camarote-nido","/soldadura-mig"]){
   await page.goto(route,{waitUntil:"domcontentloaded"});
   const metrics=await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,innerWidth:window.innerWidth}));
   expect(metrics.scrollWidth,`${route} mobile overflow`).toBeLessThanOrEqual(metrics.innerWidth+2);

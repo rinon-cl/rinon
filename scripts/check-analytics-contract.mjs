@@ -22,7 +22,9 @@ check(tracking.includes("persistIfInternal(eventName)"),"semantic CRO events per
 check(tracking.includes('eventName!=="contact_whatsapp"&&eventName!=="contact_phone"'),"click tracking avoids duplicate contact persistence");
 check(tracking.includes('sendAnalyticsEvent("generate_lead")'),"successful lead submission persists generate_lead");
 check(tracking.includes("googleAnalyticsId")&&tracking.includes("googletagmanager.com/gtag/js?id="),"GA4 loader accepts an injected measurement ID");
-check(read("app/layout.tsx").includes('process.env.VERCEL_ENV === "production"')&&read("app/layout.tsx").includes("NEXT_PUBLIC_GA_ID?.trim()"),"GA4 measurement ID is fail-closed behind explicit production env and defined ID");
+check(tracking.includes('gtag("config", gaId')&&tracking.includes("page_path: pathname"),"GA4 records client-side route changes with their page path");
+check(read("app/layout.tsx").includes('process.env.VERCEL_ENV === "production"')&&read("app/layout.tsx").includes('"G-CLSKZ2P8CJ"'),"GA4 measurement ID is restricted to production with the authorized fallback");
+check(tracking.includes("fullTrackingEnabled ? process.env.NEXT_PUBLIC_GTM_ID : undefined"),"GA4 activation does not enable GTM, Clarity or internal analytics");
 check(read("app/layout.tsx").includes("NEXT_PUBLIC_GSC_VERIFICATION?.trim() || currentGscVerificationToken"),"GSC verification falls back to the current token when env is absent");
 check(analytics.includes("quote_starts")&&analytics.includes("quote_submits")&&analytics.includes("start_to_submit_rate"),"analytics summary type exposes quote funnel metrics");
 check(Boolean(migrationName),"analytics funnel RPC migration is versioned");

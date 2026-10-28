@@ -48,7 +48,9 @@ test("footer keeps products concise and services semantically pure",async({page}
  const footer=page.locator(".s6-footer");
  const products=footer.getByRole("navigation",{name:"Productos"});
  const services=footer.getByRole("navigation",{name:"Servicios"});
- await expect(products.getByRole("link")).toHaveCount(8);
+ await expect(products.getByRole("link")).toHaveCount(10);
+ await expect(products.getByRole("link",{name:"Cama flotante"})).toBeVisible();
+ await expect(products.getByRole("link",{name:"Colchones"})).toBeVisible();
  await expect(services.getByRole("link")).toHaveCount(5);
  await expect(services.getByRole("link",{name:"Proyectos a medida"})).toHaveCount(0);
  await expect(footer.getByRole("link",{name:"Proyectos a medida"})).toBeVisible();

@@ -23,7 +23,7 @@ const gscLedger=read("docs/GSC_PENDING_URLS.csv");
 const preflight=read("scripts/preflight-production.mjs");
 
 const preservedCommercial=["camarote-nido","camarote-triple","camarote-doble","cama-alta","camarote-titanic","camarote-1-5-plazas","camarote-desmontable","cama-dos-plazas-con-cajon","camarote-2-plazas","cama-institucional-metalica","cama-loft-metalica","cama-loft-con-escritorio","mobiliario-institucional"];
-const newOwners=["/camas-metalicas","/camas-balinesas","/mesas-metalicas","/escritorios-metalicos","/soldadura-mig","/corte-metalico","/instalacion","/reparaciones-metalicas"];
+const newOwners=["/camas-metalicas","/cama-flotante","/colchones","/camas-balinesas","/mesas-metalicas","/escritorios-metalicos","/soldadura-mig","/corte-metalico","/instalacion","/reparaciones-metalicas"];
 const approvedBlogRedirects={"como-cotizar-rejas-metalicas":"/recursos/como-cotizar-rejas-metalicas","tipos-de-cierres-perimetrales":"/recursos/tipos-de-cierres-perimetrales","porton-corredizo-vs-batiente":"/recursos/porton-corredizo-vs-batiente","mezzanine-metalico-bodega-guia":"/recursos/mezzanine-metalico-bodega-guia","proveedor-camarotes-empresas":"/recursos/proveedor-camarotes-empresas","como-elegir-reja-metalica-frontis":"/recursos/como-elegir-reja-metalica-frontis"};
 const prohibitedBlogRedirects=["cuanto-cuesta-camarote-chile","cuanto-cuesta-cierre-perimetral-chile","cuanto-cuesta-porton-automatico-chile","altura-reja-casa-seguridad","camarote-nino-6-anos","camarote-para-adulto-mayor","pintura-electrostatica-que-es","camarotes-mineria-que-exige-cada-faena"];
 

@@ -6,6 +6,8 @@ export const productNavGroups:readonly NavGroup[]=[
   {label:"Camas y descanso",items:[
     {label:"Camarotes",href:"/camarotes",description:"Camas y camarotes metálicos."},
     {label:"Camas metálicas",href:"/camas-metalicas",description:"Camas para hogar, instituciones y volumen."},
+    {label:"Cama flotante",href:"/cama-flotante",description:"Estructura metálica con apoyos retraídos."},
+    {label:"Colchones",href:"/colchones",description:"Espuma, resortes Bonell y Pocket desde 1 plaza hasta Super King."},
     {label:"Camas balinesas",href:"/camas-balinesas",description:"Estructuras metálicas para terrazas y exterior."},
   ]},
   {label:"Mobiliario y equipamiento",items:[
@@ -62,6 +64,8 @@ export function isExactNavPath(pathname:string,href:string){
 export const footerProductItems:readonly NavItem[]=[
   {label:"Camarotes",href:"/camarotes"},
   {label:"Camas metálicas",href:"/camas-metalicas"},
+  {label:"Cama flotante",href:"/cama-flotante"},
+  {label:"Colchones",href:"/colchones"},
   {label:"Equipamiento",href:"/equipamiento-metalico"},
   {label:"Cierres",href:"/cierres-perimetrales"},
   {label:"Rejas",href:"/rejas-metalicas"},

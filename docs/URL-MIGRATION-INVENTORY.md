@@ -20,7 +20,7 @@ When Search Console evidence is unavailable, **default to preserving** a proven 
 
 ## 2. Dedicated RINON 2.0 intent owners — REBUILD
 
-`/camas-metalicas`, `/camas-balinesas`, `/mesas-metalicas`, `/escritorios-metalicos`, `/mallas-separadoras`, `/soldadura-mig`, `/corte-metalico`, `/instalacion`, `/reparaciones-metalicas`.
+`/camas-metalicas`, `/cama-flotante`, `/colchones`, `/camas-balinesas`, `/mesas-metalicas`, `/escritorios-metalicos`, `/mallas-separadoras`, `/soldadura-mig`, `/corte-metalico`, `/instalacion`, `/reparaciones-metalicas`.
 
 ## 3. Live-observed commercial URLs — REVIEW / GSC-PENDING
 

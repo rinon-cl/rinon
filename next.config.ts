@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { LEGACY_REDIRECTS } from "./lib/legacy-redirects";
 
 const productionRelease = process.env.RINON_INDEXABLE === "true";
 
@@ -30,6 +31,10 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
+  async redirects() {
+    // 301 permanentes para URLs del sitio anterior. Fuente: lib/legacy-redirects.ts
+    return LEGACY_REDIRECTS.map(({ source, destination }) => ({ source, destination, permanent: true }));
+  },
   async headers() {
     const noStore = [{ key: "Cache-Control", value: "no-store, max-age=0" }];
     return [

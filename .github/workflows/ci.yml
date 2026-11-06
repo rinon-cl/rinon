@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [main, produccion/rinon-v2]
 
 permissions:
   contents: read
@@ -37,7 +37,7 @@ jobs:
           node-version: 24
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Static type and migration contract
         run: npm run qa:static

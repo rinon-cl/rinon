@@ -29,7 +29,7 @@ export const COPY = {
     firstHeading: "Cuéntanos qué necesitas fabricar.",
     detailSoldaduraMig: "Soldadura MIG",
     firstStep: "Qué necesitas",
-    submitted: "Formulario revisado correctamente",
+    submitted: "Te llevamos a WhatsApp con tu solicitud lista para enviar",
   },
   location: {
     mapsProvider: /google\.com\/maps/,

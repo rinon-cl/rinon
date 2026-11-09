@@ -5,7 +5,7 @@ function check(condition,message){if(condition)console.log(`✓ ${message}`);els
 function envTrue(name){return process.env[name]==="true"}
 
 const seo=read("lib/seo.ts");const robots=read("app/robots.txt/route.ts");const proxy=read("proxy.ts");const blogPage=read("app/blog/[slug]/page.tsx");const leads=read("lib/leads.ts");const publicIntake=read("lib/public-intake.ts");const contactRoute=read("app/api/contacto/route.ts");const sitemap=read("app/sitemap.ts");const capabilities=read("lib/capabilities.ts");const navigation=read("lib/navigation.ts");const migration=read("lib/migration.ts");const visuals=read("lib/visuals.ts");const urlInventory=read("docs/URL-MIGRATION-INVENTORY.md");
-const cutoverAuthorized=envTrue("RINON_CUTOVER_AUTHORIZED");const mode=cutoverAuthorized?"AUTHORIZED CUTOVER":"SAFE PRE-CUTOVER";console.log(`RINON production preflight · ${mode}`);
+const cutoverAuthorized=envTrue("RINON_CUTOVER_AUTHORIZED");const productionRuntime=process.env.VERCEL_ENV==="production";const mode=cutoverAuthorized?"AUTHORIZED CUTOVER":productionRuntime?"POST-CUTOVER PRODUCTION":"SAFE PRE-CUTOVER";console.log(`RINON production preflight · ${mode}`);
 const pendingMatch=migration.match(/MIGRATION_GSC_REVIEW_PENDING_COUNT\s*=\s*(\d+)/);const gscPendingCount=pendingMatch?Number(pendingMatch[1]):Number.NaN;
 const visualMatch=visuals.match(/VISUAL_CUTOVER_BLOCKERS\s*=\s*\[([\s\S]*?)\]\s*as const/);const visualBlockers=visualMatch?[...visualMatch[1].matchAll(/"([^"]+)"/g)].map(match=>match[1]):null;
 
@@ -35,9 +35,12 @@ check(Array.isArray(visualBlockers),"visual registry declares machine-readable c
 
 const productionFlags=["RINON_INDEXABLE","RINON_ENABLE_MIGRATION_REDIRECTS","RINON_ENABLE_BLOG_REDIRECTS","RINON_LEAD_WRITE_ENABLED","RINON_PRODUCTION_TRACKING_ENABLED"];
 if(!cutoverAuthorized){
- for(const name of productionFlags)check(!envTrue(name),`${name} is not active before cutover authorization`);
+ for(const name of productionFlags){
+  if(productionRuntime&&(name==="RINON_INDEXABLE"||name==="RINON_PRODUCTION_TRACKING_ENABLED"))check(envTrue(name),`${name}=true is required for production deployments`);
+  else check(!envTrue(name),`${name} is not active before cutover authorization`);
+ }
  check(!envTrue("RINON_URL_INVENTORY_COMPLETE"),"URL inventory remains explicitly incomplete before final crawl/GSC reconciliation");
- notes.push("Cutover is intentionally blocked. Set RINON_CUTOVER_AUTHORIZED=true only during an explicitly authorized production release.");
+ notes.push(productionRuntime?"Production requires indexation and tracking. Migration redirects and lead writes remain blocked without cutover authorization.":"Cutover is intentionally blocked. Set RINON_CUTOVER_AUTHORIZED=true only during an explicitly authorized production release.");
  notes.push("RINON_URL_INVENTORY_COMPLETE must remain false until the live crawl and Search Console export are reconciled.");
  if(Number.isInteger(gscPendingCount)&&gscPendingCount>0)notes.push(`${gscPendingCount} live-observed URL decisions remain GSC-pending and are hard-blocked from cutover.`);
  if(Array.isArray(visualBlockers)&&visualBlockers.length>0)notes.push(`${visualBlockers.length} final visual release blockers remain: ${visualBlockers.join(", ")}.`);

@@ -32,8 +32,19 @@ test("quote flow accepts up to three private-ready reference files without writi
  await page.getByLabel("Tipo de cliente *").selectOption("Empresa");
  await page.getByLabel("WhatsApp *").fill("+56 9 1234 5678");
  await page.locator('input[name="privacidad"]').check();
+ // Sin persistencia de leads, el envío abre WhatsApp con los datos ya escritos.
+ // Se captura la URL solicitada, no la cargada: wa.me puede no resolver en CI sin red.
+ const requested=page.context().waitForEvent("request",r=>r.url().includes("wa.me/"));
+ const popup=page.waitForEvent("popup");
  await page.getByRole("button",{name:"Solicitar cotización"}).click();
- await expect(page.locator(".quote-status")).toContainText("modo de demostración");
+ const [wa,req]=await Promise.all([popup,requested]);
+ const url=decodeURIComponent(req.url());
+ expect(url).toContain("wa.me/");
+ expect(url).toContain("Nombre: Prueba QA RINON");
+ expect(url).toContain("Comuna: San Bernardo");
+ expect(url).toContain("Detalle: Necesito fabricar un soporte metálico");
+ await wa.close();
+ await expect(page.locator(".quote-status")).toContainText("WhatsApp");
 });
 
 test("quote attachment picker rejects more than three files before submission",async({page})=>{

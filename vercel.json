@@ -5,7 +5,10 @@
     "deploymentEnabled": {
       "static-preview": false,
       "preview-static-build": false,
-      "produccion/rinon-v2": false
+      "produccion/rinon-v2": false,
+      "fix/cotizar-whatsapp-fallback": false,
+      "redirects/gsc-pending-lote-1": false,
+      "ci/pr-checks-on-v2": false
     }
   }
 }

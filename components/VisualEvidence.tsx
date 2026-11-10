@@ -39,7 +39,7 @@ export function VisualEvidence({ slug, fallback, mode="default" }: { slug: strin
       : archiveRender
       ? "REFERENCIA ARQUITECTÓNICA · RENDER"
       : archiveReference
-        ? "REFERENCIA DE PRODUCTO · ARCHIVO"
+        ? "PRODUCTO DE REFERENCIA · NO ES OBRA EJECUTADA"
         : conceptual
           ? "VISUAL CONCEPTUAL"
           : "PRODUCTO / REFERENCIA ACTUAL";

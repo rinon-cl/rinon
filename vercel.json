@@ -9,7 +9,11 @@
       "fix/cotizar-whatsapp-fallback": false,
       "redirects/gsc-pending-lote-1": false,
       "ci/pr-checks-on-v2": false,
-      "fix/preflight-post-cutover": false
+      "fix/preflight-post-cutover": false,
+      "chore/next-16.4.5": false,
+      "fix/whatsapp-business": false,
+      "fix/ci-local-raleway": false,
+      "release/rinon-2026-11-10": false
     }
   }
 }

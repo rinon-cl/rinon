@@ -61,9 +61,25 @@ New quote submissions persist structured category, subcategory, quantity, locati
 
 ## Current public baseline
 
-- WhatsApp/phone: +56 9 7589 3742;
+- WhatsApp Business/phone: +56 9 2177 1838;
 - operating address: Portezuelo 1506, San Bernardo, Región Metropolitana;
 - canonical production base: `https://rinon.cl`.
+
+The public contact was updated by the owner on 2026-11-10. Before the next
+production build, set these Vercel Production values (and update any Preview
+or Development overrides that still use a different contact):
+
+```dotenv
+NEXT_PUBLIC_RINON_WHATSAPP_NUMBER=56921771838
+NEXT_PUBLIC_RINON_PHONE_DISPLAY=+56 9 2177 1838
+```
+
+These variables override the defaults in `lib/contact.ts` and are read during
+the build. Updating the source or the environment alone does not change an
+already published deployment: rebuild and deploy the intended release. After
+deployment, check WhatsApp links, quote fallback, telephone links, the displayed
+contact and Organization/ContactPoint JSON-LD. This change does not migrate a
+WhatsApp account or send messages.
 
 ## Admin
 

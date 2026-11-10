@@ -66,7 +66,7 @@ const archiveReferenceAssets: Record<string, VisualAsset[]> = {
       alt: "Camarote metálico negro de una plaza en referencia de producto",
       kind: "photo",
       provenance: "user-drive-reference",
-      label: "Referencia de producto · archivo",
+      label: "Producto de referencia · no es obra ejecutada",
       note: "Fotografía de producto proveniente del archivo del usuario. No se atribuye a un cliente o proyecto específico.",
       sourceRef: "Google Drive archive · promoted under RINON-VIS-P1-BUNK-ARCHIVE",
       sourceWidth: 1200,

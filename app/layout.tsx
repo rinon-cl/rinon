@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Raleway } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -12,9 +12,12 @@ import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { MotionController } from "@/components/MotionController";
 import { SEO_BASE_URL, isIndexableSite, organizationJsonLd } from "@/lib/seo";
 
-const raleway = Raleway({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+// Raleway is self-hosted (OFL-1.1, see app/fonts/RALEWAY-OFL-LICENSE.txt) so builds
+// never depend on reaching Google Fonts. Variable font, latin subset, weights 100-900.
+const raleway = localFont({
+  src: "./fonts/raleway-latin-wght-normal.woff2",
+  weight: "100 900",
+  style: "normal",
   display: "swap",
   variable: "--font-raleway",
 });
@@ -22,6 +25,7 @@ const raleway = Raleway({
 const indexable = isIndexableSite();
 const productionTracking = process.env.RINON_PRODUCTION_TRACKING_ENABLED === "true";
 const currentGscVerificationToken = "lCFMIIVsso0tKtwMRjnZWQs1l2FbYnlJPWpqxsqjj_Y";
+const legacyGscVerificationToken = "DG5fIXNQgMGRpHGC0RwK-R3QvIyx20qjrQQdMRqCymQ";
 const gscVerificationToken = process.env.NEXT_PUBLIC_GSC_VERIFICATION?.trim() || currentGscVerificationToken;
 const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim() || "G-CLSKZ2P8CJ";
 const gaMeasurementId = /^G-[A-Z0-9]+$/i.test(gaId) && process.env.VERCEL_ENV === "production" ? gaId : undefined;
@@ -35,7 +39,7 @@ export const metadata: Metadata = {
   category: "Fabricación metálica",
   icons: { icon: "/brand/favicon-64.png", apple: "/brand/apple-touch-icon-180.png" },
   verification: {
-    google: gscVerificationToken,
+    google: [...new Set([gscVerificationToken, legacyGscVerificationToken])],
   },
   openGraph: {
     siteName: "RINON",

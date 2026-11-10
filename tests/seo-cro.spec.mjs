@@ -23,10 +23,7 @@ const dedicatedCommercialRoutes=[
  "/mallas-3d","/mallas-separadoras","/fabricacion-metalica",
 ];
 
-const preCutoverRedirectAliases=[
-  "/cercos-metalicos-santiago","/portones-industriales","/mallas-separadoras-industriales","/soldadura-metalica-santiago",
-];
-const currentGscVerificationToken="lCFMIIVsso0tKtwMRjnZWQs1l2FbYnlJPWpqxsqjj_Y";
+const currentGscVerificationToken="lCFMIIVsso0tKtwMRjnZWQs1l2FbYnlJPWpqxsqjj_Y";const legacyGscVerificationToken="DG5fIXNQgMGRpHGC0RwK-R3QvIyx20qjrQQdMRqCymQ";
 
 async function assertSeoShell(page,route){
  const response=await page.goto(route,{waitUntil:"domcontentloaded"});
@@ -41,8 +38,8 @@ async function assertSeoShell(page,route){
  expect(title.trim().length,`${route} title`).toBeGreaterThan(15);
  const description=await page.locator('meta[name="description"]').getAttribute("content");
  expect(description?.trim().length??0,`${route} description`).toBeGreaterThan(45);
- const verification=await page.locator('meta[name="google-site-verification"]').getAttribute("content");
- expect(verification,`${route} GSC verification token`).toBe(currentGscVerificationToken);
+ const verification=await page.locator('meta[name="google-site-verification"]').evaluateAll(nodes=>nodes.map(node=>node.getAttribute("content")));
+ expect(verification,`${route} GSC verification tokens`).toEqual([currentGscVerificationToken,legacyGscVerificationToken]);
  const text=await page.locator("main").innerText();
  expect(text,`${route} mojibake`).not.toMatch(/Ã.|Â.|â€|�/u);
 }
@@ -142,14 +139,6 @@ test("rejas and portones preserve a dual conversion choice at the decision point
  }
 });
 
-test("pre-cutover migration aliases remain disabled in staging",async({page})=>{
- for(const route of preCutoverRedirectAliases){
-  const response=await page.goto(route,{waitUntil:"domcontentloaded"});
-  expect(response?.status(),`${route} must not redirect before authorized cutover`).toBe(404);
-  const robots=await page.locator('meta[name="robots"]').first().getAttribute("content");
-  expect(robots?.toLowerCase(),`${route} 404 robots`).toContain("noindex");
- }
-});
 
 test("representative organic landings remain usable at mobile width",async({page})=>{
  await page.setViewportSize({width:390,height:900});

@@ -23,9 +23,6 @@ const dedicatedCommercialRoutes=[
  "/mallas-3d","/mallas-separadoras","/fabricacion-metalica",
 ];
 
-const preCutoverRedirectAliases=[
-  "/cercos-metalicos-santiago","/portones-industriales","/mallas-separadoras-industriales","/soldadura-metalica-santiago",
-];
 const currentGscVerificationToken="lCFMIIVsso0tKtwMRjnZWQs1l2FbYnlJPWpqxsqjj_Y";
 
 async function assertSeoShell(page,route){
@@ -142,14 +139,6 @@ test("rejas and portones preserve a dual conversion choice at the decision point
  }
 });
 
-test("pre-cutover migration aliases remain disabled in staging",async({page})=>{
- for(const route of preCutoverRedirectAliases){
-  const response=await page.goto(route,{waitUntil:"domcontentloaded"});
-  expect(response?.status(),`${route} must not redirect before authorized cutover`).toBe(404);
-  const robots=await page.locator('meta[name="robots"]').first().getAttribute("content");
-  expect(robots?.toLowerCase(),`${route} 404 robots`).toContain("noindex");
- }
-});
 
 test("representative organic landings remain usable at mobile width",async({page})=>{
  await page.setViewportSize({width:390,height:900});

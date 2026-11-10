@@ -1,6 +1,6 @@
 export const DEFAULT_PUBLIC_CONTACT = {
-  whatsapp: "56975893742",
-  phoneDisplay: "+56 9 7589 3742",
+  whatsapp: "56921771838",
+  phoneDisplay: "+56 9 2177 1838",
   addressLine: "Portezuelo 1506",
   locality: "San Bernardo",
   region: "Región Metropolitana",

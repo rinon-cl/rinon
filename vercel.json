@@ -9,7 +9,8 @@
       "fix/cotizar-whatsapp-fallback": false,
       "redirects/gsc-pending-lote-1": false,
       "ci/pr-checks-on-v2": false,
-      "fix/preflight-post-cutover": false
+      "fix/preflight-post-cutover": false,
+      "fix/whatsapp-business": false
     }
   }
 }

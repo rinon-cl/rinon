@@ -5,13 +5,14 @@
  * Este archivo implementa SOLO las decisiones con bloqueo "ninguno" o
  * clasificadas como "equivalente" (listas B y decisiones documentadas).
  *
- * NO incluye, por decisión documentada, las 12 URLs que siguen bloqueadas:
+ * Desde el 10-nov-2026 incluye también, como consolidación PROVISIONAL,
+ * las 12 URLs antes bloqueadas:
  *  - dato_gsc (9): camarotes-faenas, -salmoneras, -mineria, -para-internados,
  *    -para-hospitales, -militares, rejas-decorativas, rejas-para-terraza,
  *    rejas-para-balcon.
  *  - decision_cobertura (2): cercos-perimetrales-concepcion, -antofagasta.
  *  - decision_dueño (1): camarotes-san-bernardo.
- * Esas 12 siguen en 404 hasta que se levante su bloqueo. Ver LEGACY_PENDING.
+ * Total: 58 redirects 301. LEGACY_PENDING queda vacío.
  */
 
 export type LegacyRedirect = { source: string; destination: string };
@@ -72,14 +73,24 @@ export const LEGACY_REDIRECTS: readonly LegacyRedirect[] = [
   { source: "/pintura-electrostatica-la-pintana", destination: "/pintura-electrostatica" },
   { source: "/pintura-electrostatica-la-cisterna", destination: "/pintura-electrostatica" },
   { source: "/pintura-electrostatica-zona-sur-santiago", destination: "/pintura-electrostatica" },
+  // ── Consolidaciones PROVISIONALES (12) ────────────────────────────────
+  // Autorizadas por Felipe el 10-nov-2026 (encargo de release). Antes
+  // bloqueadas por dato GSC / cobertura / decisión del dueño. Revisar con
+  // datos de Search Console; ver docs/url-mapping-gsc-pending.md.
+  { source: "/cercos-perimetrales-concepcion", destination: "/cierres-perimetrales" },
+  { source: "/cercos-perimetrales-antofagasta", destination: "/cierres-perimetrales" },
+  { source: "/camarotes-san-bernardo", destination: "/camarotes" },
+  { source: "/camarotes-faenas", destination: "/camarotes" },
+  { source: "/camarotes-salmoneras", destination: "/camarotes" },
+  { source: "/camarotes-mineria", destination: "/camarotes" },
+  { source: "/camarotes-para-internados", destination: "/camarotes" },
+  { source: "/camarotes-para-hospitales", destination: "/camarotes" },
+  { source: "/camarotes-militares", destination: "/camarotes" },
+  { source: "/rejas-decorativas", destination: "/rejas-metalicas" },
+  { source: "/rejas-para-terraza", destination: "/rejas-metalicas" },
+  { source: "/rejas-para-balcon", destination: "/rejas-metalicas" },
 ];
 
 /** URLs heredadas que siguen bloqueadas. Documentadas aquí para que el test
  *  garantice que NO se redirigen por accidente. */
-export const LEGACY_PENDING: readonly string[] = [
-  "/camarotes-faenas", "/camarotes-salmoneras", "/camarotes-mineria",
-  "/camarotes-para-internados", "/camarotes-para-hospitales", "/camarotes-militares",
-  "/rejas-decorativas", "/rejas-para-terraza", "/rejas-para-balcon",
-  "/cercos-perimetrales-concepcion", "/cercos-perimetrales-antofagasta",
-  "/camarotes-san-bernardo",
-];
+export const LEGACY_PENDING: readonly string[] = [];

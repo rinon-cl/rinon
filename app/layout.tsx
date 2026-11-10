@@ -25,6 +25,7 @@ const raleway = localFont({
 const indexable = isIndexableSite();
 const productionTracking = process.env.RINON_PRODUCTION_TRACKING_ENABLED === "true";
 const currentGscVerificationToken = "lCFMIIVsso0tKtwMRjnZWQs1l2FbYnlJPWpqxsqjj_Y";
+const legacyGscVerificationToken = "DG5fIXNQgMGRpHGC0RwK-R3QvIyx20qjrQQdMRqCymQ";
 const gscVerificationToken = process.env.NEXT_PUBLIC_GSC_VERIFICATION?.trim() || currentGscVerificationToken;
 const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim() || "G-CLSKZ2P8CJ";
 const gaMeasurementId = /^G-[A-Z0-9]+$/i.test(gaId) && process.env.VERCEL_ENV === "production" ? gaId : undefined;
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
   category: "Fabricación metálica",
   icons: { icon: "/brand/favicon-64.png", apple: "/brand/apple-touch-icon-180.png" },
   verification: {
-    google: gscVerificationToken,
+    google: [...new Set([gscVerificationToken, legacyGscVerificationToken])],
   },
   openGraph: {
     siteName: "RINON",

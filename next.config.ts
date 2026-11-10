@@ -33,7 +33,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   async redirects() {
     // 301 permanentes para URLs del sitio anterior. Fuente: lib/legacy-redirects.ts
-    return LEGACY_REDIRECTS.map(({ source, destination }) => ({ source, destination, permanent: true }));
+    return LEGACY_REDIRECTS.map(({ source, destination }) => ({ source, destination, statusCode: 301 as const }));
   },
   async headers() {
     const noStore = [{ key: "Cache-Control", value: "no-store, max-age=0" }];

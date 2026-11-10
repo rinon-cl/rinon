@@ -248,3 +248,27 @@ No se corrigio en este lote.
 ### 5. Exclusión deliberada de `/tratamiento-superficies`
 
 Decision registrada el 2026-09-07: `/tratamiento-superficies` queda sin enlazar por instruccion explicita. No es una omision del inventario ni un error de IA. La ruta depende de la decision no tecnica sobre la linea "Terminaciones" y no debe ser enlazada automaticamente desde este lote.
+
+
+## Actualización 2026-11-10 — 58 redirects 301 activos
+
+Por autorización de Felipe (encargo de release del 10-nov-2026), las 12 URLs antes bloqueadas
+se consolidan de forma **provisional** con redirect 301:
+
+| Origen | Destino |
+|---|---|
+| /cercos-perimetrales-concepcion | /cierres-perimetrales |
+| /cercos-perimetrales-antofagasta | /cierres-perimetrales |
+| /camarotes-san-bernardo | /camarotes |
+| /camarotes-faenas | /camarotes |
+| /camarotes-salmoneras | /camarotes |
+| /camarotes-mineria | /camarotes |
+| /camarotes-para-internados | /camarotes |
+| /camarotes-para-hospitales | /camarotes |
+| /camarotes-militares | /camarotes |
+| /rejas-decorativas | /rejas-metalicas |
+| /rejas-para-terraza | /rejas-metalicas |
+| /rejas-para-balcon | /rejas-metalicas |
+
+Son provisionales: revisar con datos de Search Console y, si se justifica, crear páginas propias.
+Implementación: `lib/legacy-redirects.ts` + `next.config.ts` con `statusCode: 301` (no 308).

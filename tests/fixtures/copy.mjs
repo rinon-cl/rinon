@@ -11,8 +11,8 @@ export const COPY = {
     balineseBedCaptionNote: "Medidas, terminación, cubierta y textiles se definen según el espacio.",
   },
   visuals: {
-    archiveCaption: "REFERENCIA DE PRODUCTO · ARCHIVO",
-    homeHeroCaption: /Visual conceptual · 720 × 730 fuente/,
+    archiveCaption: "PRODUCTO DE REFERENCIA · NO ES OBRA EJECUTADA",
+    homeHeroCaption: /^Visual conceptual$/,
   },
   home: {
     heroClaim: "Lo necesitas",

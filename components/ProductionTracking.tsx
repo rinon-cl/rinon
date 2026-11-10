@@ -24,7 +24,10 @@ declare global {
 function hasAnalyticsConsent() { try { const saved = JSON.parse(localStorage.getItem(CONSENT_KEY) ?? "null"); return saved?.value === "all"; } catch { return false; } }
 function ensureGoogleTag() {
   window.dataLayer = window.dataLayer ?? [];
-  window.gtag = window.gtag ?? ((...args: unknown[]) => { window.dataLayer?.push(args as unknown as Record<string, unknown>); });
+  // gtag.js only processes `arguments` objects pushed to the dataLayer; a rest-parameter
+  // array is ignored, which silently drops js/config/event commands (no /g/collect).
+  // eslint-disable-next-line prefer-rest-params
+  window.gtag = window.gtag ?? function gtag() { window.dataLayer?.push(arguments as unknown as Record<string, unknown>); };
   return window.gtag;
 }
 function getAnonymousId(storage: Storage, key: string) { const saved = storage.getItem(key); if (saved) return saved; const value = crypto.randomUUID().replaceAll("-", ""); storage.setItem(key, value); return value; }

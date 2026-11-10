@@ -32,5 +32,8 @@ for(const token of ["quote_start","quote_submit","maps_click","waze_click","star
 check(adminAnalytics.includes("Analítica comercial")&&adminAnalytics.includes("Inicio → envío")&&adminAnalytics.includes("Envío → lead"),"admin analytics view exposes the persisted quote funnel");
 check(adminAnalytics.includes("isValidAdminToken")&&adminAnalytics.includes('robots: { index: false, follow: false }'),"admin analytics view is auth-gated and noindex");
 check(packageJson.includes('"qa:analytics"'),"package scripts expose analytics contract QA");
+check(/function gtag\(\)\s*\{[^}]*dataLayer\?\.push\(arguments/.test(tracking)&&!/\.\.\.args[^)]*\)\s*=>\s*\{\s*window\.dataLayer\?\.push\(args/.test(tracking),"gtag shim pushes the arguments object (gtag.js ignores plain arrays)");
+const nextConfig=read("next.config.ts");
+check(/connect-src[^"]*https:\/\/\*\.google-analytics\.com/.test(nextConfig)&&/connect-src[^"]*https:\/\/\*\.google\.com/.test(nextConfig)&&/img-src[^"]*https:\/\/www\.googletagmanager\.com/.test(nextConfig),"CSP allows the GA4/GTM endpoints from Google's CSP guide");
 if(failures.length){console.error(`\nRINON ANALYTICS CONTRACT FAILED (${failures.length} issues).`);process.exit(1)}
 console.log(`\nRINON ANALYTICS CONTRACT PASSED: ${required.length} consented CRO events aligned across client, API, Edge intake, RPC and admin funnel.`);

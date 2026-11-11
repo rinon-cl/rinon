@@ -143,6 +143,62 @@ export const seoPages = {
     canonical: "/camarote-con-escritorio-full",
   }),
 
+  mezzanines: buildMetadata({
+    title: "Mezzanines Metálicos | Ampliación de Bodega — Rinon.cl",
+    description: "Diseñamos y fabricamos mezzanines metálicos a medida para ampliar tu bodega o taller. Cálculo de carga, montaje e instalación.",
+    keywords: ["mezzanine metalico", "mezzanine bodega", "mezzanine industrial"],
+    canonical: "/mezzanines-metalicos",
+  }),
+
+  escaleras: buildMetadata({
+    title: "Escaleras Metálicas a Medida | Rinon.cl",
+    description: "Escaleras metálicas para acceso interno y externo: rectas, caracol y soluciones industriales. Fabricación e instalación.",
+    keywords: ["escaleras metalicas", "escalera metalica a medida", "escalera industrial"],
+    canonical: "/escaleras-metalicas",
+  }),
+
+  pergolas: buildMetadata({
+    title: "Pérgolas Metálicas a Medida | Rinon.cl",
+    description: "Pérgolas y estructuras exteriores en acero para terrazas, patios y locales comerciales. Diseño y fabricación a medida.",
+    keywords: ["pergolas metalicas", "pergola metalica", "pergolas terraza"],
+    canonical: "/pergolas-metalicas",
+  }),
+
+  racks: buildMetadata({
+    title: "Racks y Estanterías Metálicas | Rinon.cl",
+    description: "Racks metálicos y soluciones de almacenamiento a medida para bodegas, depósitos y logística. Cálculo de cargas y diseño funcional.",
+    keywords: ["racks metalicos", "estanterias metalicas", "rack industrial"],
+    canonical: "/racks-metalicos",
+  }),
+
+  estructuraBodega: buildMetadata({
+    title: "Estructuras Metálicas para Bodegas | Rinon.cl",
+    description: "Estructuras de acero para bodegas y naves industriales: vigas, marcos, soportes y plataformas diseñadas para tu operación.",
+    keywords: ["estructura metalica bodega", "estructura metalica industrial", "estructura para deposito"],
+    canonical: "/estructura-metalica-bodega",
+  }),
+
+  soportes: buildMetadata({
+    title: "Soportes Metálicos y Bases | Rinon.cl",
+    description: "Soportes y bases metálicas para maquinaria, equipos y estructuras. Fabricación precisa y soluciones de montaje.",
+    keywords: ["soportes metalicos", "bases metalicas", "soporte maquinaria"],
+    canonical: "/soportes-metalicos",
+  }),
+
+  plataformas: buildMetadata({
+    title: "Plataformas Metálicas a Medida | Rinon.cl",
+    description: "Plataformas metálicas para trabajo, acceso e instalación industrial. Diseño según carga y normativa.",
+    keywords: ["plataformas metalicas", "plataforma metalica a medida", "plataforma industrial"],
+    canonical: "/plataformas-metalicas",
+  }),
+
+  marquesinas: buildMetadata({
+    title: "Marquesinas Metálicas | Coberturas y Accesos — Rinon.cl",
+    description: "Marquesinas y coberturas metálicas para entradas, estacionamientos y fachadas. Fabricación y montaje a medida.",
+    keywords: ["marquesina metalica", "cobertura metalica", "marquesina a medida"],
+    canonical: "/marquesinas-metalicas",
+  }),
+
   cotizar: buildMetadata({
     title: "Cotizar Camarotes y Estructuras Metálicas | Rinon.cl",
     description: "Solicita una cotización de camarotes, estructuras metálicas, portones, rejas, cierres o pintura electrostática. Atención directa por WhatsApp.",

@@ -45,3 +45,7 @@ Generar consultas por WhatsApp — sin precios en pantalla.
 - Poner precios en pantalla
 - Inventar medidas — solo usar las de `/lib/products.ts`
 - Mezclar código de otros proyectos
+
+## CONTINUIDAD MULTIAGENTE
+
+Lee siempre `AI/AGENTS.md`, `AI/WORKFLOW.md`, `AI/TASKS.md`, `AI/DECISIONS.md` y `AI/HANDOFF.md`. Si la persona indica que Codex agotó sus tokens, retoma desde `AI/HANDOFF.md` sin repetir trabajo terminado. Mantén el rol de arquitecto/diseño, entrega implementación repetitiva a Gemini o al Constructor y actualiza el traspaso al finalizar.

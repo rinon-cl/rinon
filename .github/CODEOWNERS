@@ -1,0 +1,8 @@
+# Asignar revisores automáticos
+# Sintaxis: <ruta> <owner>
+
+/* @enrique636
+app/ @enrique636
+components/ @enrique636
+lib/ @enrique636
+.github/ @enrique636

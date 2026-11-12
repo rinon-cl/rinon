@@ -1,3 +1,4 @@
+import { SEO_OVERRIDES } from "@/lib/seo-overrides";
 import type { Metadata } from "next";
 import { DEFAULT_PUBLIC_CONTACT, publicAddressLine, publicLocality, publicPhoneDisplay } from "@/lib/contact";
 
@@ -23,6 +24,9 @@ export function routeMetadata(
   options: { indexable?: boolean } = {},
 ): Metadata {
   const indexable = (options.indexable ?? true) && isIndexableSite();
+  const override = SEO_OVERRIDES[`/${pathname.replace(/^\/+|\/+$/g, "")}`] ?? {};
+  title = (override.title ?? title).replace(/\.$/, "");
+  description = override.description ?? description;
   return {
     title,
     description,

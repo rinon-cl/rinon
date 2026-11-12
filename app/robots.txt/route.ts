@@ -8,13 +8,14 @@ import { SEO_BASE_URL, isIndexableSite } from "@/lib/seo";
  * el uso del contenido:
  *   search=yes     el buscador sigue autorizado a indexar y enlazar
  *   ai-train=no    no se autoriza entrenar modelos con este contenido
- *   ai-input=no    no se autoriza usarlo como entrada de sistemas de IA
+ *   ai-input=yes   se autoriza usarlo como entrada de respuestas de IA (citas en
+ *                  buscadores con IA). Decisión: docs/seo-geo-aeo/01-decision-content-signals.md
  *
  * La señal se declara en los dos modos: una preferencia de uso no depende de
  * si el sitio está indexable. El gate de indexación es independiente y sigue
  * siendo fail-closed.
  */
-const contentSignal = "Content-Signal: ai-train=no, search=yes, ai-input=no";
+const contentSignal = "Content-Signal: ai-train=no, search=yes, ai-input=yes";
 
 export function GET() {
   const lines = [contentSignal, "", "User-agent: *"];

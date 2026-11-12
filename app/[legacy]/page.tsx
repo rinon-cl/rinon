@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { CommercialEvidencePanel } from "@/components/CommercialEvidencePanel";
 import { VisualEvidence } from "@/components/VisualEvidence";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
-import { routeMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { canonicalUrl, routeMetadata, SEO_BASE_URL } from "@/lib/seo";
 import { hasPhotographicEvidence } from "@/lib/visuals";
 import { getLegacyCommercialLanding, legacyCommercialSlugs } from "@/lib/legacy-commercial";
 
@@ -26,7 +27,20 @@ export default async function LegacyCommercialPage({ params }: { params: Promise
   const heroEvidence=landing.points.slice(0,4).map((point)=>({label:point.title,body:point.body}));
   const quoteCategory=new URL(landing.quoteHref,"https://rinon.cl").searchParams.get("category") ?? "general";
 
+  const name=landing.title.replace(/\.$/,"");
+  const parentName=landing.parentLabel.replace(/^Ver\s+/i,"").replace(/^\w/,c=>c.toUpperCase());
+  const productLike=/^\/(cama|camarote|mobiliario)/.test(slug);
+  const jsonLd:Record<string,unknown>[]=[
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"RINON","item":SEO_BASE_URL},
+      {"@type":"ListItem","position":2,"name":parentName,"item":canonicalUrl(landing.parentHref)},
+      {"@type":"ListItem","position":3,"name":name,"item":canonicalUrl(slug)}]},
+  ];
+  if(productLike)jsonLd.unshift({"@context":"https://schema.org","@type":"Product","@id":`${canonicalUrl(slug)}#product`,"name":name,"description":landing.description,"url":canonicalUrl(slug),"brand":{"@type":"Brand","name":"RINON"},"manufacturer":{"@id":`${SEO_BASE_URL}/#organization`},"category":slug==="/mobiliario-institucional"?"Mobiliario metálico institucional":"Camas y camarotes metálicos","material":"Metal"});
+  if(landing.faq.length)jsonLd.push({"@context":"https://schema.org","@type":"FAQPage","mainEntity":landing.faq.map(item=>({"@type":"Question","name":item.q,"acceptedAnswer":{"@type":"Answer","text":item.a}}))});
+
   return <main className="v5-editorial-page theme-product">
+    <JsonLd data={jsonLd}/>
     <section className="v2-solution-hero">
       <div className="container v2-solution-hero-grid">
         <div>
@@ -40,7 +54,7 @@ export default async function LegacyCommercialPage({ params }: { params: Promise
           </div>
           <div className="solution-meta-line"><span>Configuración confirmada al cotizar</span><span>Cantidad y destino</span><span>Alcance vigente</span></div>
         </div>
-        {hasPhotographicEvidence(slug)?<VisualEvidence slug={slug} fallback={landing.points.map((point)=>point.title)}/>:<CommercialEvidencePanel title="QUÉ CONVIENE CONFIRMAR" items={heroEvidence} note="Esta URL conserva una intención comercial histórica; medidas, precios y especificaciones se confirman con el requerimiento vigente."/>}
+        {hasPhotographicEvidence(slug)?<VisualEvidence slug={slug} fallback={landing.points.map((point)=>point.title)}/>:<CommercialEvidencePanel title="QUÉ CONVIENE CONFIRMAR" items={heroEvidence} note="Medidas, terminación y especificaciones se confirman según tu requerimiento, cantidad y destino."/>}
       </div>
     </section>
 
@@ -48,7 +62,7 @@ export default async function LegacyCommercialPage({ params }: { params: Promise
       <div className="container">
         <div className="section-head">
           <div><div className="v2-eyebrow">ANTES DE COTIZAR</div><h2>La versión vigente se define con el requerimiento.</h2></div>
-          <p>Conservamos esta página porque corresponde a una búsqueda comercial específica de RINON. No trasladamos automáticamente medidas, precios o especificaciones antiguas.</p>
+          <p>Cada pedido se fabrica según medidas, cantidad y uso. Confirmamos la configuración contigo antes de cotizar, para que lo que recibes coincida con lo que necesitas.</p>
         </div>
         <div className="card-grid">
           {landing.points.map((point, index) => <article key={point.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{point.title}</h3><p>{point.body}</p></article>)}
